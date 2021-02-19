@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<H1>Welcome to TRUESTAY</H1>
+			<p>Where You Can Find Your Best Accommodation</p>
+			<a class="btn btn-primary btn-lg"	href="/listings/new">Add New Listing</a>
+		</div>
+	</header>
+	<div class="row" style="display: flex; flex-wrap: wrap">
+		<% listings.forEach(function(listing){ %>
+			<div class="col-md-3 col-sm-6">
+				<div class="thumbnail">
+					<img src="<%= listing.image %>">
+					<div class="caption text-center">
+						<h4><%=listing.title%></h4>
+						<a href="/listings/<%=listing._id%>" class="btn btn-primary">More Info</a>
+					</div>
+				</div>
+			</div>
+		<% }) %>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

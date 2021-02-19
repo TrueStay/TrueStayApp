@@ -1,0 +1,92 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<h2 class="lead">TrueStay</h2>
+			<div class="list-group">
+				<li class="list-group-item active">info 1</li>
+				<li class="list-group-item">info 2</li>
+				<li class="list-group-item">info 3</li>
+			</div>
+			<div id="map"></div>
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img src="<%=listing.image%>" width="500">
+				<div class="caption-full">
+				<strong><p class="pull-right"><%=listing.price%>$/night</p></strong>
+				<h4><a><%=listing.title%></a></h4>
+				<p><%=listing.desc%></p>
+				<p><em>Submitted By <a href="/users/<%=listing.author.id%>"><%=listing.author.username%></a></em> - <%=moment(listing.createdAt).fromNow()%></p>
+				<% if (currentUser && currentUser._id.equals(listing.author.id) || currentUser && currentUser.isAdmin){ %>
+					<a href="/listings/<%=listing._id%>/edit" class="btn btn-warning">Edit</a>
+					<form id="delete-form" action="/listings/<%=listing._id%>?_method=delete" method="POST">
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				<% } %>
+				</div>
+			</div>
+			<div class="well">
+				<div class="text-right">
+					<a href="/listings/<%=listing._id%>/comment/new" class="btn btn-primary">New Comment</a>
+				</div>
+				<hr>
+				<div>
+
+					<% listing.comments.forEach(function(comment){ %>
+						<div class="row">
+							<div class="col-md-12">
+								<strong><%=comment.author.username%></strong>
+								<span class="pull-right"><%=moment(comment.createdAt).fromNow()%></span>
+								<div class="row">
+									<div class="col-sm-9">
+										<p><%=comment.content%></p>
+									</div>
+									<% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+										<div class="col-sm-3 text-right">
+											<a class="btn btn-warning btn-sm " href="/listings/<%= listing._id %>/comment/<%=  comment._id %>/edit">edit</a>
+											<form class="comment-mod" action="/listings/<%= listing._id %>/comment/<%=  comment._id %>?_method=delete" method="POST">
+												<button class="btn btn-danger btn-sm" type="submit">Delete</button>
+											</form>
+										</div>
+									<% } %>
+								</div>
+							</div>
+						</div>
+					<% }); %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  function initMap() {
+    var lat = <%= listing.lat %>;
+    var lng = <%= listing.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= listing.title %><br />
+      <%= listing.location %></strong>
+      <p><%= listing.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&callback=initMap'></script>
+<%- include("../partials/footer") %>
+
