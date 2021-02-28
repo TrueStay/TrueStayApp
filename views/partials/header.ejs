@@ -26,6 +26,11 @@
 	            	<a href="/listings">Home</a>
 	            </li>
 	          </ul>
+			  <ul class="nav navbar-nav">
+	            <li class="<%= typeof page !== 'undefined' && page === 'search' ? 'active' : '' %>">
+	            	<a href="/search">Seach</a>
+	            </li>
+	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	              <% if(!currentUser){ %>
 	                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>

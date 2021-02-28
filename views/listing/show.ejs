@@ -15,7 +15,7 @@
 			<div class="thumbnail">
 				<img src="<%=listing.image%>" width="500">
 				<div class="caption-full">
-				<strong><p class="pull-right"><%=listing.price%>$/night</p></strong>
+				<strong><p class="pull-right"><%=listing.price%>$/month</p></strong>
 				<h4><a><%=listing.title%></a></h4>
 				<p><%=listing.desc%></p>
 				<p><em>Submitted By <a href="/users/<%=listing.author.id%>"><%=listing.author.username%></a></em> - <%=moment(listing.createdAt).fromNow()%></p>
@@ -74,7 +74,7 @@
       <strong><%= listing.title %><br />
       <%= listing.location %></strong>
       <p><%= listing.description %></p>
-    `
+    `;
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
