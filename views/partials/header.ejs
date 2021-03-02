@@ -28,7 +28,7 @@
 	          </ul>
 			  <ul class="nav navbar-nav">
 	            <li class="<%= typeof page !== 'undefined' && page === 'search' ? 'active' : '' %>">
-	            	<a href="/search">Seach</a>
+	            	<a href="/search">Find on Map</a>
 	            </li>
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
@@ -36,7 +36,7 @@
 	                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
 	                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
 	              <% } else { %>
-	                  <li><a href="/users/<%=currentUser._id%>">Signed In As <%= currentUser.username %></a></li>
+	                  <li><a href="/users/<%=currentUser._id%>">Signed In As <%= currentUser.username %> ( <%= currentUser.userType%> )</a></li>
 	                  <li><a href="/logout">Logout</a></li>
 	              <% } %>
 	          </ul>
