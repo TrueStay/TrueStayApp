@@ -28,3 +28,10 @@ h1 {
 	height: 400px;
 	width: 100%;
 }
+
+.filter-area {
+	padding-top: 10px;
+	padding-left: 10px;
+	border: 1px solid #eee;
+	margin-bottom: 10px;
+}

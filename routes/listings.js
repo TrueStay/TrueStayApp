@@ -26,6 +26,45 @@ router.get("/", function(req,res){
 		}
 	});
 });
+
+// filter listings route
+router.post("/filter", function(req,res){
+	var where = {};
+	switch(req.body.filterOption){
+		case "0-400":
+			where.price = { $gt : 0, $lt: 399};
+			break;
+		case "400-600":
+			where.price = { $gt : 400, $lt: 599};
+			break;
+		case "600-800":
+			where.price = { $gt : 600, $lt: 799};
+			break;
+		case "800-1000":
+			where.price = { $gt : 800, $lt: 999};
+			break;
+		case "1000-*":
+			where.price = { $gt : 1000};
+			break;		
+	}
+	var sort = {};
+	if(req.body.sortBy == "desc"){
+		sort.sort = {'price': -1};
+	} else if (req.body.sortBy == "asc") {
+		sort.sort = {'price': 1};
+	} else {
+		sort.sort = {'createdAt': 1};
+	}
+	Listing.find(where,null, sort, function(err, allListings){
+		if(err){
+			res.flash("error", "Something went wrong, Please contact your admin!");
+			console.log(err);
+		}else{
+			res.render("listing/index", {listings: allListings, page: "listings"});
+		}
+	});
+});
+
 // create route - to post create request
 router.post("/",middleware.isLoggedIn, function(req,res){
 	var title = req.body.title,
@@ -60,7 +99,7 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 });
 
 // new route - to show create form
-router.get("/new",middleware.isLoggedIn, function(req,res){
+router.get("/new",middleware.isLoggedIn, middleware.checkIsLandlord, function(req,res){
 	res.render("listing/new");
 });
 
