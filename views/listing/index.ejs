@@ -9,6 +9,86 @@
 			<a class="btn btn-primary btn-lg"	href="/listings/new">Add New Listing</a>
 		</div>
 	</header>
+	<div class="filter-area">
+		<form id="filter" name="filter" class="mb-4" action="/listings/filter" method="POST">
+			<ul class="list-inline">
+				<li><h5><strong>Price: </strong></h5></li>
+				<li>
+					<input
+					value="0-400"
+					type="radio"
+					class="filter-option form-check-input"
+					id="under4"
+					name="filterOption"
+					/>
+					<label
+					class="form-check-label small text-uppercase card-link-secondary"
+					for="under4"
+					>Under $400</label>
+				</li>
+				<li>
+					<input
+					value="400-600"
+					type="radio"
+					class="filter-option form-check-input"
+					id="46"
+					name="filterOption"
+					/>
+					<label
+					class="form-check-label small text-uppercase card-link-secondary"
+					for="46"
+					>$400 to $600</label>
+				</li>
+				<li>
+					<input
+					value="600-800"
+					type="radio"
+					class="filter-option form-check-input"
+					id="68"
+					name="filterOption"
+					/>
+					<label
+					class="form-check-label small text-uppercase card-link-secondary"
+					for="68"
+					>$600 to $800</label>
+				</li>
+				<li>
+					<input
+					value="800-1000"
+					type="radio"
+					class="filter-option form-check-input"
+					id="810"
+					name="filterOption"
+					/>
+					<label
+					class="form-check-label small text-uppercase card-link-secondary"
+					for="810"
+					>$800 to $1000</label>
+				</li>
+				<li>
+					<input
+					value="1000-*"
+					type="radio"
+					class="filter-option form-check-input"
+					id="above10"
+					name="filterOption"
+					/>
+					<label
+					class="form-check-label small text-uppercase card-link-secondary"
+					for="above10"
+					>$1000 & Above</label>
+				</li>
+				<li>
+					<select name="sortBy" form="filter" class="btn btn-default dropdown-toggle">
+						<option value="0">Sort By</option>
+						<option value="asc">Low to High</option>
+						<option value="desc">High to Low</option>
+					</select>
+				</li>
+				<li><button class="btn btn-default" type="submit">Search</button></li>
+			</ul>
+		</form>
+	</div>
 	<div class="row" style="display: flex; flex-wrap: wrap">
 		<% listings.forEach(function(listing){ %>
 			<div class="col-md-3 col-sm-6">
@@ -16,6 +96,7 @@
 					<img src="<%= listing.image %>">
 					<div class="caption text-center">
 						<h4><%=listing.title%></h4>
+						<p><%=listing.price%>$/month</p>
 						<a href="/listings/<%=listing._id%>" class="btn btn-primary">More Info</a>
 					</div>
 				</div>
@@ -23,5 +104,13 @@
 		<% }) %>
 	</div>
 </div>
-
+<!-- <script>
+	var sortOptions = document.getElementsByClassName("sortOption");
+	console.log(sortOptions);
+	for (var i = 0; i < sortOptions.length; i++) {
+		sortOptions[i].addEventListener('select', function() {
+			console.log(this);
+		});
+	}
+</script> -->
 <%- include("../partials/footer") %>

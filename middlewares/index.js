@@ -1,5 +1,6 @@
 var Listing = require("../models/listing"),
 	Comment = require("../models/comment");
+	User = require("../models/user");
 var middlewareObj = {}
 
 middlewareObj.checkListingOwnership = function(req,res,next){
@@ -18,6 +19,24 @@ middlewareObj.checkListingOwnership = function(req,res,next){
 		}
 	});
 };
+middlewareObj.checkIsLandlord = function(req, res, next){
+	User.findById(req.user._id, function(err, foundUser){
+		if(err){
+			console.log(err);
+			res.flash("error", "Something went wrong, Please contact you admin!");
+			res.redirect("back");
+		} else {
+			console.log(foundUser.userType);
+			if(foundUser.userType == "landLord" || req.user.isAdmin){
+				next();
+			} else {
+				req.flash("error", "Your account type is not landlord. If you want to post listings, please register as a landlord.");
+				res.redirect("back");
+			}
+		}
+	});
+};
+
 
 middlewareObj.checkCommentOwnership = function(req,res,next){
 	Comment.findById(req.params.comment_id, function(err, foundComment){

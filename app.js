@@ -13,6 +13,7 @@ var indexRouter = require("./routes/index"),
 	listingRouter = require("./routes/listings"),
 	commentRouter = require("./routes/comments"),
 	authRouter = require("./routes/auth");
+	searchRouter = require("./routes/search");
 
 // pass a variable named moment to all of our view files
 // app.locals.moment = require("moment");
@@ -56,6 +57,7 @@ app.use("/",indexRouter);
 app.use("/listings",listingRouter);
 app.use("/listings/:id/comment",commentRouter);
 app.use("/",authRouter);
+app.use("/search",searchRouter);
 
 app.listen(8000, function(){
 	console.log("TrueStay server has started!");
