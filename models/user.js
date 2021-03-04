@@ -10,7 +10,12 @@ var userSchema = new mongoose.Schema({
 	},
 	firstName: String,
 	lastName: String,
-	email: String,
+	email: {
+        type: String,
+
+        match: /.+\@.+\..+/
+    },
+	phone: String,
 	DoB: Date,
 	userType: String,
 });

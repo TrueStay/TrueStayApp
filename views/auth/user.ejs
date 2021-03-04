@@ -1,11 +1,29 @@
 <%- include("../partials/header") %>
-	<h1>Profile Page</h1>
-	<div class="container">
-
-		<li><%=user.username%></li>
-		<li><%=user.firstName%>-<%=user.lastName%></li>
-		<li><%=user.email%></li>
-		<li><%=user.DoB%></li>
+<link rel="stylesheet" href="/stylesheets/user.css">
+<div class="container">
+	<div class="row">
+		<div>
+            <div class="profile">
+                <div class="back card">
+					<img alt="background card" src="/imgs/defCard.jpg" onerror="this.src='/imgs/defCard.jpg';">
+                </div>
+                <div class="pic">
+                    <img alt="profile picture" src="/imgs/defaultProfilePic.png" onerror="this.src='/imgs/defaultProfilePic.png';">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <p><%=user.username%></p>
+                    </div>
+                    <div class="desc"><%=user.firstName%> <%=user.lastName%></div>
+                    <div class="desc"><%=user.email%></div>
+                    <div class="desc"><%=user.phone%></div>
+                </div>
+            </div>
+        </div>
 	</div>
-
+    <div class="row">
+        <button class="button_1"><span>View My Listings </span></button>
+        <button class="button_2"><span>Edit My Profile </span></button>
+    </div>
+</div>
 <%- include("../partials/footer") %>

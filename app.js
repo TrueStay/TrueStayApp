@@ -60,5 +60,5 @@ app.use("/",authRouter);
 app.use("/search",searchRouter);
 
 app.listen(8000, function(){
-	console.log("TrueStay server has started!");
+	console.log("TrueStay server has started at http://localhost:8000");
 });

@@ -13,6 +13,7 @@ router.post("/register", function(req,res){
 		firstName:req.body.firstName, 
 		lastName:req.body.lastName, 
 		email:req.body.email,
+		phone: req.body.phone,
 		DoB:req.body.dob,
 		userType: req.body.userType
 	});
