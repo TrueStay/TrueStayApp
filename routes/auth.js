@@ -54,6 +54,7 @@ router.get("/logout", function(req,res){
 });
 
 router.get("/users/:id", function(req, res){
+	
 	User.findById(req.params.id, function(err, foundUser){
 		if(err){
 			console.log(err);
