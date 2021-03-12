@@ -103,6 +103,19 @@ router.get("/new",middleware.isLoggedIn, middleware.checkIsLandlord, function(re
 	res.render("listing/new");
 });
 
+router.get("/mylistings/:id", function(req,res){
+	
+	//Listing.find({author : {elemMatch : {id : "6040ef7b63b3175388cfcd2a"}}}, function(err, allListings){
+	Listing.find({"author.id" : req.params.id}, function(err, allListings){
+		if(err){
+			res.flash("error", "Something went wrong, Please contact your admin!");
+			console.log(err);
+		}else{
+			res.render("listing/index", {listings: allListings, page: "mylistings"});
+		}
+	});
+});
+
 // show route - to show detail
 router.get("/:id", function(req,res){
 	Listing.findById(req.params.id).populate("comments").exec(function(err, foundListing){

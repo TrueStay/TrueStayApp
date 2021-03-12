@@ -74,7 +74,7 @@
     text-overflow: ellipsis;
 }
 
-.button_1 {
+.button_1, .button_1:hover, .button_1:visited {
     background-color: #006effda;
     border-radius: 50px 50px 50px 50px;
     color: #FFFFFF;
@@ -85,10 +85,11 @@
     transition: all 0.5s;
     cursor: pointer;
     margin: 15px;
+    float: left;
     border-width: 0;
   }
   
-.button_2 {
+.button_2, .button_2:hover, .button_2:visited {
     background-color: #ff9100da;
     border-radius: 50px 50px 50px 50px;
     color: #FFFFFF;
@@ -103,14 +104,14 @@
     border-width: 0;
   }
 
-button span {
+a span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
   }
   
-button span:after {
+a span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -119,11 +120,11 @@ button span:after {
     transition: 0.5s;
   }
   
-button:hover span {
+a:hover span {
     padding-right: 25px;
   }
   
-button:hover span:after {
+a:hover span:after {
     opacity: 1;
     right: 0;
   }
