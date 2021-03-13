@@ -19,6 +19,7 @@ var indexRouter = require("../../routes/index"),
 	commentRouter = require("../../routes/comments"),
 	authRouter = require("../../routes/auth");
 	searchRouter = require("../../routes/search");
+    Listing = require("../../models/listing")
 
 // pass a variable named moment to all of our view files
 // app.locals.moment = require("moment");
@@ -66,38 +67,7 @@ app.use("/listings/:id/comment",commentRouter);
 app.use("/",authRouter);
 app.use("/search",searchRouter);
 
-
-describe("POST /register", () => {
-
-    before((done) => {
-        mockgoose.prepareStorage()
-        .then(() => {
-            mongoose.connect("mongodb://localhost/true_stay");
-            done();
-        })
-        .catch((err) => done(err));
-    })
-
-    after((done) => {
-        mongoose.disconnect()
-        .then(() => done())
-        .catch((err) => done(err));
-    })
-
-    it("OK :: successfully registered a new user", (done) => {
-        request(app).post("/register")
-        .send({username: "testTenant", password: 'testpass', userType:"tenant"})
-        .then((res) => {
-            const body = res.body;
-            expect(302);
-            done();
-        })
-        .catch((err) => done(err));
-    })
-
-})
-
-describe("POST /login", () => {
+/*describe("POST /listings/:id/comment/", () => {
 
     before((done) => {
         mockgoose.prepareStorage()
@@ -114,15 +84,18 @@ describe("POST /login", () => {
         .catch((err) => done(err));
     })
 
-    it("OK :: successfully logged in", (done) => {
-        request(app).post("/login")
-        .send({username: "testTenant", password: 'testpass'})
+    it("OK :: successfully created a new listing", (done) => {
+        let l = new Listing({title: "testListing", 
+                        price: "999", 
+                        loation: "Toronto"});
+        console.log(l);
+        request(app).post("/listings/"+l.id+"/comment/")
+        .send({content: "Test Comment"})
         .then((res) => {
-            const body = res.body;
-            expect(302);
+            expect(res).to.have.property('status', 302);
             done();
         })
         .catch((err) => done(err));
     })
 
-})
+})*/
