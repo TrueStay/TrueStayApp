@@ -105,7 +105,6 @@ router.get("/new",middleware.isLoggedIn, middleware.checkIsLandlord, function(re
 
 router.get("/mylistings/:id", function(req,res){
 	
-	//Listing.find({author : {elemMatch : {id : "6040ef7b63b3175388cfcd2a"}}}, function(err, allListings){
 	Listing.find({"author.id" : req.params.id}, function(err, allListings){
 		if(err){
 			res.flash("error", "Something went wrong, Please contact your admin!");

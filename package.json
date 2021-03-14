@@ -4,12 +4,13 @@
   "description": "Yelpcamp Application",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --exit --timeout 50000"
   },
   "author": "Eric Nguyen",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.3.3",
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.2",
@@ -17,12 +18,15 @@
     "express-session": "^1.17.1",
     "locus": "^2.0.4",
     "method-override": "^3.0.0",
+    "mocha": "^8.3.1",
+    "mockgoose": "^8.0.4",
     "moment": "^2.26.0",
     "mongoose": "^5.9.13",
     "node-geocoder": "^3.27.0",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "supertest": "^6.1.3"
   }
 }
