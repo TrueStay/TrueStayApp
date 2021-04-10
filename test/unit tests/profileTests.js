@@ -19,7 +19,7 @@ var indexRouter = require("../../routes/index"),
 	commentRouter = require("../../routes/comments"),
 	authRouter = require("../../routes/auth");
 	searchRouter = require("../../routes/search");
-    Listing = require("../../models/listing")
+    User = require("../../models/user")
 
 // pass a variable named moment to all of our view files
 // app.locals.moment = require("moment");
@@ -67,7 +67,7 @@ app.use("/listings/:id/comment",commentRouter);
 app.use("/",authRouter);
 app.use("/search",searchRouter);
 
-describe("POST /listings/:id/comment/", () => {
+describe("GET /users/:id", () => {
 
     before((done) => {
         mockgoose.prepareStorage()
@@ -84,15 +84,17 @@ describe("POST /listings/:id/comment/", () => {
         .catch((err) => done(err));
     })
 
-    it("OK :: successfully created a new comment", (done) => {
-        let l = new Listing({title: "testListing", 
-                        price: "999", 
-                        loation: "Toronto"});
-        console.log(l);
-        request(app).post("/listings/"+l.id+"/comment/")
-        .send({content: "Test Comment"})
+    it("OK :: successfully viewed user profile", (done) => {
+        let u = new User({username: "testTenant", 
+                            password: "testpass", 
+                            email: "test@gmail.com",
+                            usertype: "landLord"
+                        });
+        console.log(u);
+        User.create(u);
+        request(app).get("/users/"+u.id)
         .then((res) => {
-            expect(res).to.have.property('status', 302);
+            expect(res).to.have.property('status', 200);
             done();
         })
         .catch((err) => done(err));
