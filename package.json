@@ -2,6 +2,9 @@
   "name": "yelpcamapp",
   "version": "1.0.0",
   "description": "Yelpcamp Application",
+  "engines": {
+    "node": "12.11.1"
+    },
   "main": "app.js",
   "scripts": {
     "test": "mocha --recursive --exit --timeout 50000",
