@@ -4,7 +4,8 @@
   "description": "Yelpcamp Application",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --recursive --exit --timeout 50000"
+    "test": "mocha --recursive --exit --timeout 50000",
+    "start": "node app.js"
   },
   "author": "Eric Nguyen",
   "license": "ISC",
